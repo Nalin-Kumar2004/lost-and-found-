@@ -1,15 +1,12 @@
 const express = require('express');
 const router = express.Router();
-
 const Item = require('../models/Item');
 
-// ----------------------------------------------------------------
-// ROUTE 1: Naya item post karna (Yeh pehle se bana hua hai)
-// ----------------------------------------------------------------
+// ROUTE 1: Naya item post karna (Pehle se hai)
 router.post('/', async (req, res) => {
+  // ... (no change here)
   try {
     const newItem = new Item({
-      // ... (yahan ka code waisa hi hai, change nahi hua)
       type: req.body.type,
       title: req.body.title,
       category: req.body.category,
@@ -28,31 +25,44 @@ router.post('/', async (req, res) => {
   }
 });
 
-
-// ================================================================
-// NAYA CODE YAHAN SE SHURU HAI
-// ================================================================
-
-// ----------------------------------------------------------------
-// ROUTE 2: Saare items get karna
-// ----------------------------------------------------------------
-// @route   GET api/items
-// @desc    Get all lost and found items
-// @access  Public
+// ROUTE 2: Saare items get karna (Pehle se hai)
 router.get('/', async (req, res) => {
+  // ... (no change here)
   try {
-    // Item.find() database mein se saare items dhoond kar le aayega.
-    // .sort({ postedAt: -1 }) se saare items date ke hisaab se sort ho jayenge (sabse naya sabse upar).
     const items = await Item.find().sort({ postedAt: -1 });
-    res.json(items); // Saare items ko JSON format mein frontend ko bhej do
+    res.json(items);
   } catch (error) {
     console.error('Error fetching items:', error.message);
     res.status(500).json({ message: 'Server error, please try again.' });
   }
 });
 
+// ================================================================
+// NAYA CODE YAHAN SE SHURU HAI
+// ================================================================
 
-module.exports = router;
+// ----------------------------------------------------------------
+// ROUTE 3: Ek single item ko uski ID se get karna
+// ----------------------------------------------------------------
+// @route   GET api/items/:id
+// @desc    Get a single item by its ID
+// @access  Public
+router.get('/:id', async (req, res) => {
+  try {
+    // req.params.id se hum URL se ID nikaal rahe hain
+    const item = await Item.findById(req.params.id);
+
+    // Agar uss ID ka item nahi milta hai, toh error bhejo
+    if (!item) {
+      return res.status(404).json({ message: 'Item not found' });
+    }
+
+    res.json(item); // Agar item mil gaya, toh usko bhej do
+  } catch (error) {
+    console.error('Error fetching item by ID:', error.message);
+    res.status(500).json({ message: 'Server error, please try again.' });
+  }
+});
 
 module.exports = router;
 
@@ -82,3 +92,6 @@ module.exports = router;
 // •	module.exports = router; hona chahiye, taki app.use() sahi tarike se kaam kare.
 // •	Agar aap kuch aur export karenge (jaise function ya object jo router nahi hai), toh error aayega ya route kaam nahi karega.
 // Aapko hamesha router hi export karna hai jab aap Express routes bana rahe hain.
+
+
+
