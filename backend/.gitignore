@@ -1,0 +1,9 @@
+# Node modules folder
+/backend/node_modules
+/frontend/node_modules
+
+# Environment variables file
+.env
+
+# Production build folder
+/frontend/dist
