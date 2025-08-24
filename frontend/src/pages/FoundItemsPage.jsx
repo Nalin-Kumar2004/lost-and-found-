@@ -103,3 +103,4 @@ const FoundItemsPage = () => {
 };
 
 export default FoundItemsPage;
+

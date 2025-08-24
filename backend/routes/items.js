@@ -2,10 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Item = require('../models/Item');
 
-// ROUTE 1: Naya item post karna (Pehle se hai)
+// ----------------------------------------------------------------
+// ROUTE 1: Naya item post karna (YAHAN BADLAAV HAI)
+// ----------------------------------------------------------------
 router.post('/', async (req, res) => {
-  // ... (no change here)
   try {
+    // Hum ab saare fields ko req.body se le rahe hain,
+    // jisme imageUrl bhi shaamil hai.
     const newItem = new Item({
       type: req.body.type,
       title: req.body.title,
@@ -16,7 +19,9 @@ router.post('/', async (req, res) => {
       contactName: req.body.contactName,
       contactEmail: req.body.contactEmail,
       contactPhone: req.body.contactPhone,
+      imageUrl: req.body.imageUrl, // <-- YEH LINE SABSE ZAROORI HAI BHUL GYE SAVE KARNA
     });
+
     const savedItem = await newItem.save();
     res.status(201).json(savedItem);
   } catch (error) {
@@ -24,6 +29,7 @@ router.post('/', async (req, res) => {
     res.status(500).json({ message: 'Server error, please try again.' });
   }
 });
+
 
 // ROUTE 2: Saare items get karna (Pehle se hai)
 router.get('/', async (req, res) => {
