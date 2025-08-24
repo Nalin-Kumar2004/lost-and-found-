@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import LostItemsPage from './pages/LostItemsPage';
 import FoundItemsPage from './pages/FoundItemsPage';
 import ReportPage from './pages/ReportPage';
+import ItemDetailsPage from './pages/ItemDetailsPage'; // Isko import karo
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
           <Route path="/found" element={<FoundItemsPage />} />
           <Route path="/report" element={<ReportPage />} />
           {/* Hum yahan aur bhi routes add karenge, jaise item details page ke liye */}
+          {/* YEH NAYA ROUTE HAI */}
+          <Route path="/items/:id" element={<ItemDetailsPage />} />
         </Routes>
       </main>
       <Footer />
