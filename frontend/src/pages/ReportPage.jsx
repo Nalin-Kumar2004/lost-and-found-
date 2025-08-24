@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast'; // <-- Step 1: Toast ko import karo
 
 const BIT_LOCATIONS = [ 'Library', 'Main Building', 'Lecture Halls (LH/SH)', 'Workshop', 'Cafeteria', 'Canteen', 'Hostel Area (NH/GH/PG)', 'Sports Complex', 'SAC', 'Parking', 'Auditorium', 'Admin Block', 'Bus Stop / Gate', 'Campus Roads', 'Health Center', 'Other' ];
 const CATEGORIES = [ 'Electronics', 'Documents', 'Personal Items', 'Apparel', 'Accessories', 'ID Cards', 'Others' ];
@@ -49,7 +50,8 @@ const ReportPage = () => {
 
       } catch (uploadError) {
         console.error('Error uploading image:', uploadError);
-        alert('Image upload failed. Please try again.');
+        // Step 2: alert() ko toast.error() se badlo
+        toast.error('Image upload failed. Please try again.');
         setIsSubmitting(false);
         return;
       }
@@ -59,11 +61,14 @@ const ReportPage = () => {
       const finalData = { ...data, imageUrl };
       const response = await axios.post('http://localhost:5000/api/items', finalData);
       console.log('Server response:', response.data);
-      alert('Item reported successfully!');
+      
+      // Step 2: alert() ko toast.success() se badlo
+      toast.success('Item reported successfully!');
       navigate('/');
     } catch (dbError) {
       console.error('Error submitting form to DB:', dbError);
-      alert('Failed to report item. Please check the console for details.');
+      // Step 2: alert() ko toast.error() se badlo
+      toast.error('Failed to report item. Please check the console.');
     } finally {
       setIsSubmitting(false);
     }
@@ -73,7 +78,7 @@ const ReportPage = () => {
     <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Report an Item</h1>
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
-        {/* ... (baaki saare form fields waise hi rahenge) ... */}
+        {/* ... (All your form fields remain exactly the same) ... */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">Type*</label>
           <div className="flex space-x-4">

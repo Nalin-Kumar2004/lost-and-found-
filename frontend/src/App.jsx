@@ -7,10 +7,12 @@ import LostItemsPage from './pages/LostItemsPage';
 import FoundItemsPage from './pages/FoundItemsPage';
 import ReportPage from './pages/ReportPage';
 import ItemDetailsPage from './pages/ItemDetailsPage'; // Isko import karo
+import { Toaster } from 'react-hot-toast'; // <-- Toster import karo
 
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
+      <Toaster position="top-center" /> {/* <-- Toster yahan add karo */}
       <Header />
       <main className="flex-grow container mx-auto px-6 py-8">
         <Routes>
