@@ -8,6 +8,7 @@ import FoundItemsPage from './pages/FoundItemsPage';
 import ReportPage from './pages/ReportPage';
 import AboutPage from './pages/AboutPage'; // <-- Isko import karo
 import ItemDetailsPage from './pages/ItemDetailsPage'; // Isko import karo
+import ContactPage from './pages/ContactPage'; // <-- Isko import karo
 import { Toaster } from 'react-hot-toast'; // <-- Toster import karo
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           {/* YEH NAYA ROUTE HAI */}
           <Route path="/items/:id" element={<ItemDetailsPage />} />
           <Route path="/about" element={<AboutPage />} /> {/* <-- Yeh naya route hai */}
+          <Route path="/contact" element={<ContactPage />} /> {/* <-- Yeh naya route hai */}
         </Routes>
       </main>
       <Footer />

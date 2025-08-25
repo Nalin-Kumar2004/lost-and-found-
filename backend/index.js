@@ -71,6 +71,8 @@ app.use('/api/uploads', require('./routes/uploads')); // <-- YEH NAYI LINE HAI
 
 app.use('/api/contact', require('./routes/contact')); // <-- YEH NAYI LINE HAI
 
+app.use('/api/reports', require('./routes/reports')); // <-- YEH NAYI LINE HAI
+
 
 // Ek simple sa test route jo server ke homepage par "Hello World" dikhata hai.
 app.get('/', (req, res) => {
