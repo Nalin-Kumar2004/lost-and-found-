@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import LostItemsPage from './pages/LostItemsPage';
 import FoundItemsPage from './pages/FoundItemsPage';
 import ReportPage from './pages/ReportPage';
+import AboutPage from './pages/AboutPage'; // <-- Isko import karo
 import ItemDetailsPage from './pages/ItemDetailsPage'; // Isko import karo
 import { Toaster } from 'react-hot-toast'; // <-- Toster import karo
 
@@ -23,6 +24,7 @@ function App() {
           {/* Hum yahan aur bhi routes add karenge, jaise item details page ke liye */}
           {/* YEH NAYA ROUTE HAI */}
           <Route path="/items/:id" element={<ItemDetailsPage />} />
+          <Route path="/about" element={<AboutPage />} /> {/* <-- Yeh naya route hai */}
         </Routes>
       </main>
       <Footer />
