@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/Homepage';
 import LostItemsPage from './pages/LostItemsPage';
 import FoundItemsPage from './pages/FoundItemsPage';
 import ReportPage from './pages/ReportPage';
