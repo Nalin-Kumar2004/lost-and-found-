@@ -31,7 +31,10 @@ const PORT = process.env.PORT || 5000;
 // Middlewares aisi functions hain jo har request ke aane par, route tak pahunchne se pehle chalti hain.
 
 // CORS Middleware: Yeh frontend (jo alag port par chal raha hai) ko backend se request karne ki permission deta hai.
-app.use(cors());
+app.use(cors({
+  origin: 'https://lost-and-found-kappa-ivory.vercel.app/' // Yahan apna Vercel URL daalo
+}));
+
 
 // Body Parser Middleware for JSON: Yeh server ko batata hai ki frontend se aane waale JSON data ko kaise samajhna hai.
 // Iske bina, `req.body` hamesha khaali (undefined) rahega.

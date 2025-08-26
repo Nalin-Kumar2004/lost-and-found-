@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
         <p><strong>Item ID:</strong> ${itemId}</p>
         <p><strong>Reason:</strong> ${reason}</p>
         <p><strong>Message:</strong> ${message || 'No message provided.'}</p>
-        <p>Click here to view the item: <a href="http://localhost:5173/items/${itemId}">View Item</a></p>
+        <p>Click here to view the item: <a href="https://lost-and-found-kappa-ivory.vercel.app/items/${itemId}">View Item</a></p>
       `,
     };
     // IMPORTANT: Upar 'YOUR_FRONTEND_URL' ko apne frontend ke URL se badalna, jaise 'http://localhost:5173'
