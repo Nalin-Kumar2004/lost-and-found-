@@ -10,7 +10,7 @@ const ReportModal = ({ isOpen, onClose, itemId }) => {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
-      await axios.post('http://localhost:5000/api/reports', { ...data, itemId });
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/reports`, { ...data, itemId });
       toast.success('Report submitted successfully. Thank you!');
       reset();
       onClose(); // Modal band kar do

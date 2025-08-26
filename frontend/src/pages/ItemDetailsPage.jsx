@@ -15,7 +15,7 @@ const ItemDetailsPage = () => {
   useEffect(() => {
     const fetchItemDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/items/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/items/${id}`);
         setItem(response.data);
       } catch (err) {
         setError('Could not fetch item details. The item may not exist.');

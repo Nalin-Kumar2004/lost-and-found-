@@ -11,7 +11,7 @@ const ContactPage = () => {
     setIsSubmitting(true);
     try {
       // Backend ke naye /api/contact route ko call karo
-      await axios.post('http://localhost:5000/api/contact', data);
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/contact`, data);
       toast.success('Your message has been sent successfully!');
       reset(); // Form ko khaali kar do
     } catch (error) {

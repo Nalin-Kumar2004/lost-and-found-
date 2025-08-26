@@ -27,7 +27,7 @@ const ReportPage = () => {
       try {
         const timestamp = Date.now();
         
-        const signResponse = await axios.post('http://localhost:5000/api/uploads/sign', {
+        const signResponse = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/uploads/sign`, {
           timestamp,
           upload_preset: CLOUDINARY_UPLOAD_PRESET,
         });
@@ -59,7 +59,7 @@ const ReportPage = () => {
 
     try {
       const finalData = { ...data, imageUrl };
-      const response = await axios.post('http://localhost:5000/api/items', finalData);
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/items`, finalData);
       console.log('Server response:', response.data);
       
       // Step 2: alert() ko toast.success() se badlo

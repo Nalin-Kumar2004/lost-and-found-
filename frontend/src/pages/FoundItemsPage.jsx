@@ -25,7 +25,7 @@ const FoundItemsPage = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/items');
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/items`);
         // ===== BAS YAHAN BADLAAV HAI =====
         const foundItems = response.data.filter(item => item.type === 'found');
         setAllItems(foundItems);

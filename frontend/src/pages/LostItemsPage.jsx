@@ -21,7 +21,7 @@ const LostItemsPage = () => {
     // ... (useEffect ka logic waise hi rahega)
     const fetchItems = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/items');
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/items`);
         const lostItems = response.data.filter(item => item.type === 'lost');
         setAllItems(lostItems);
       } catch (err) {

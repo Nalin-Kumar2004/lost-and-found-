@@ -11,7 +11,7 @@ const RecentItemsList = ({ type, title }) => {
   useEffect(() => {
     const fetchRecentItems = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/items');
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/items`);
         const filteredItems = response.data
           .filter(item => item.type === type) // Type ke hisaab se filter karo
           .slice(0, 3); // Sirf shuru ke 3 items lo (sabse naye)
