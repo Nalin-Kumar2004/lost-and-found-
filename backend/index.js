@@ -32,7 +32,7 @@ const PORT = process.env.PORT || 5000;
 
 // CORS Middleware: Yeh frontend (jo alag port par chal raha hai) ko backend se request karne ki permission deta hai.
 app.use(cors({
-  origin: 'https://lost-and-found-kappa-ivory.vercel.app/' // Yahan apna Vercel URL daalo
+  origin: 'https://lost-and-found-kappa-ivory.vercel.app' // Yahan apna Vercel URL daalo
 }));
 
 
