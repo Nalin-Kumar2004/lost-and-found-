@@ -7,7 +7,7 @@ const ItemCard = ({ item }) => {
     <Link to={`/items/${item._id}`} className="block">
       <div className="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out h-full">
         <img
-          className="w-full h-48 object-cover"
+          className="w-full h-48 object-contain bg-gray-100"
           src={item.imageUrl || 'https://via.placeholder.com/400x300.png/007bff/ffffff?text=No+Image'}
           alt={item.title}
         />
