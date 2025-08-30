@@ -41,7 +41,12 @@ const LostItemsPage = () => {
     return matchesSearch && matchesCategory && matchesLocation;
   });
 
-  if (loading) return <div className="text-center p-10">Loading...</div>;
+
+   // --- YAHAN BADLAAV KIYA HAI ---
+  if (loading) {
+    // "Loading..." text ki jagah Spinner component use karo
+    return <Spinner />;
+  }
   if (error) return <div className="text-center p-10 text-red-500">{error}</div>;
 
   return (
