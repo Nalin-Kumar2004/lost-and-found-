@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Spinner from '../components/Spinner';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import ReportModal from '../components/ReportModal'; // <-- Modal ko import karo
@@ -34,7 +35,7 @@ const ItemDetailsPage = () => {
     return <Spinner />;
   }
 
-  
+
   if (error) return <div className="text-center p-10 text-red-500">{error}</div>;
   if (!item) return <div className="text-center p-10">Item not found.</div>;
 

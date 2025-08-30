@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Spinner from '../components/Spinner';
 import axios from 'axios';
 import ItemCard from '../components/ItemCard';
 
@@ -59,7 +60,7 @@ const FoundItemsPage = () => {
     return <Spinner />;
   }
 
-  
+
   if (error) return <div className="text-center p-10 text-red-500">{error}</div>;
 
   return (
