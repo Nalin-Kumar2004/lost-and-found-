@@ -8,7 +8,7 @@ const ItemCard = ({ item }) => {
       <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out h-full p-4 flex flex-col">
         <div className="w-full aspect-[4/3] bg-gray-100 flex items-center justify-center overflow-hidden rounded-xl mb-2">
           <img
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
             src={item.imageUrl || 'https://via.placeholder.com/400x300.png/007bff/ffffff?text=No+Image'}
             alt={item.title}
           />
