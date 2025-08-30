@@ -1,24 +1,34 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast'; // <-- Step 1: Toast ko import karo
+// Step 1: useSearchParams ko react-router-dom se import karo
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const BIT_LOCATIONS = [ 'Library', 'Main Building', 'Lecture Halls (LH/SH)', 'Workshop', 'Cafeteria', 'Canteen', 'Hostel Area (NH/GH/PG)', 'Sports Complex', 'SAC', 'Parking', 'Auditorium', 'Admin Block', 'Bus Stop / Gate', 'Campus Roads', 'Health Center', 'Other' ];
 const CATEGORIES = [ 'Electronics', 'Documents', 'Personal Items', 'Apparel', 'Accessories', 'ID Cards', 'Others' ];
 
-// .env file se variables ko access karna
 const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 const CLOUDINARY_API_KEY = import.meta.env.VITE_CLOUDINARY_API_KEY;
 const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 
 const ReportPage = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const navigate = useNavigate();
+  // Step 2: URL se 'type' parameter ko padhne ka setup
+  const [searchParams] = useSearchParams();
+  const formType = searchParams.get('type'); // Yeh 'lost' ya 'found' hoga
+
+  // Step 3: useForm ko defaultValues do
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      type: formType || '' // Form load hote hi 'type' field ki value set kar do
+    }
+  });
   
+  const navigate = useNavigate();
   const [imageFile, setImageFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // onSubmit function mein koi badlaav nahi hai, woh waisa hi rahega
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     let imageUrl = '';
@@ -26,7 +36,6 @@ const ReportPage = () => {
     if (imageFile) {
       try {
         const timestamp = Date.now();
-        
         const signResponse = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/uploads/sign`, {
           timestamp,
           upload_preset: CLOUDINARY_UPLOAD_PRESET,
@@ -42,15 +51,11 @@ const ReportPage = () => {
         formData.append('signature', signature);
 
         const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
-        
         const uploadResponse = await axios.post(cloudinaryUrl, formData);
-        
         imageUrl = uploadResponse.data.secure_url;
-        console.log('Image uploaded successfully:', imageUrl);
 
       } catch (uploadError) {
         console.error('Error uploading image:', uploadError);
-        // Step 2: alert() ko toast.error() se badlo
         toast.error('Image upload failed. Please try again.');
         setIsSubmitting(false);
         return;
@@ -60,14 +65,10 @@ const ReportPage = () => {
     try {
       const finalData = { ...data, imageUrl };
       const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/items`, finalData);
-      console.log('Server response:', response.data);
-      
-      // Step 2: alert() ko toast.success() se badlo
       toast.success('Item reported successfully!');
       navigate('/');
     } catch (dbError) {
       console.error('Error submitting form to DB:', dbError);
-      // Step 2: alert() ko toast.error() se badlo
       toast.error('Failed to report item. Please check the console.');
     } finally {
       setIsSubmitting(false);
@@ -78,7 +79,7 @@ const ReportPage = () => {
     <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Report an Item</h1>
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
-        {/* ... (All your form fields remain exactly the same) ... */}
+        {/* Baaki saara form ka JSX bilkul waisa hi rahega */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">Type*</label>
           <div className="flex space-x-4">
@@ -87,6 +88,8 @@ const ReportPage = () => {
           </div>
           {errors.type && <p className="text-red-500 text-sm mt-1">{errors.type.message}</p>}
         </div>
+        
+        {/* Baaki saare form fields... */}
         <div>
           <label htmlFor="title" className="block text-gray-700 font-medium mb-2">Item Name*</label>
           <input id="title" type="text" {...register('title', { required: 'Item name is required' })} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"/>
