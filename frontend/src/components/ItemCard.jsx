@@ -5,12 +5,14 @@ const ItemCard = ({ item }) => {
   return (
     // Poore div ko Link component se wrap kar do
     <Link to={`/items/${item._id}`} className="block">
-      <div className="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out h-full">
-        <img
-          className="w-full h-48 object-contain bg-gray-100"
-          src={item.imageUrl || 'https://via.placeholder.com/400x300.png/007bff/ffffff?text=No+Image'}
-          alt={item.title}
-        />
+      <div className="bg-white rounded-2xl shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out h-full">
+        <div className="w-full aspect-[4/3] bg-gray-100 flex items-center justify-center overflow-hidden">
+          <img
+            className="w-full h-full object-cover"
+            src={item.imageUrl || 'https://via.placeholder.com/400x300.png/007bff/ffffff?text=No+Image'}
+            alt={item.title}
+          />
+        </div>
         <div className="p-4">
           <h3 className="text-lg font-semibold text-gray-800 mb-1 truncate">
             {item.title}
