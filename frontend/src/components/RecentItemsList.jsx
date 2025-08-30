@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Spinner from './Spinner';
 import axios from 'axios';
 import ItemCard from './ItemCard';
 import { Link } from 'react-router-dom';
@@ -27,7 +28,7 @@ const RecentItemsList = ({ type, title }) => {
   }, [type]); // Dependency array mein 'type' daalo
 
   if (loading) {
-    return <div className="text-center p-4">Loading...</div>;
+    return <Spinner />;
   }
 
   return (
